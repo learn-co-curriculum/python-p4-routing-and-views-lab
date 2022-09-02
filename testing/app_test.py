@@ -1,44 +1,77 @@
-"""
-pytest requires that all testing modules, classes, methods, and functions
-contain the word "test" somewhere within them.
+from bs4 import BeautifulSoup
+import io
+import sys
 
-The conventions for naming tests in the Python curriculum are as follows:
+from app.flask_app import app
 
-    - One test module should be created for each class. If there are no classes
-      to test, one test module should be created for each module being tested.
-    - Test modules should be named {classname}_test.py, or {modulename}_test.py
-      if necessary.
-    - Test modules should be located at the base of the "testing" package.
+class TestApp:
+    '''Flask application in flask_app.py'''
 
-    In {modulename}_test.py:
-        - There should be one testing class for each function, named
-          Test{Functionname}.
-        - Each testing class should contain the following docstring:
+    def test_index_route(self):
+        '''has a resource available at "/".'''
+        response = app.test_client().get('/')
+        assert(response.status_code == 200)
 
-            '''Function {functionname}() in {modulename}.py'''
+    def test_index_text(self):
+        '''displays "Python Operations with Flask Routing and Views" in h1 in browser.'''
+        response = app.test_client().get('/')
+        assert(response.data.decode() == '<h1>Python Operations with Flask Routing and Views</h1>')
 
-        - Each testing method should be named test_{performs/does_behavior},
-          where {performs/does_behavior} is a clear and concise description of
-          the desired behavior.
-        - Each testing method should only test one behavior.
-        - Each testing method should contain the following docstring:
+    def test_print_route(self):
+        '''has a resource available at "/print/<parameter>".'''
+        response = app.test_client().get('/print/hello')
+        assert(response.status_code == 200)
 
-            '''performs/does behavior when {x} happens.'''
-            
-            ...where {x} describes the manipulation that takes place within
-            the test.
-"""
+    def test_print_text(self):
+        '''displays text of route in browser.'''
+        response = app.test_client().get('/print/hello')
+        assert(response.data.decode() == 'hello')
 
-class TestFunctionA:
-    '''Function {functionname}() in {modulename}.py'''
+    def test_print_text_in_console(self):
+        '''displays text of route in console.'''
+        captured_out = io.StringIO()
+        sys.stdout = captured_out
+        app.test_client().get('/print/hello')
+        sys.stdout = sys.__stdout__
+        assert(captured_out.getvalue() == 'hello\n')
 
-    def test_performs_behavior(self):
-        '''performs behavior when something happens.'''
-        assert(False)
+    def test_count_route(self):
+        '''has a resource available at "/count/<parameter>".'''
+        response = app.test_client().get('/count/5')
+        assert(response.status_code == 200)
 
-class TestFunctionB:
-    '''Function {functionname}() in {modulename}.py'''
+    def test_count_range_10(self):
+        '''counts through range of parameter in "/count/<parameter" on separate lines.'''
+        response = app.test_client().get('/count/10')
+        count = '0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n'
+        assert(response.data.decode() == count)
 
-    def test_performs_behavior(self):
-        '''performs behavior when something happens.'''
-        assert(False)
+    def test_math_route(self):
+        '''has a resource available at "/math/<parameters>".'''
+        response = app.test_client().get('/math/5+5')
+        assert(response.status_code == 200)
+
+    def test_math_add(self):
+        '''adds parameters in "/math/" resource when operation is "+".'''
+        response = app.test_client().get('/math/5+5')
+        assert(response.data.decode() == '10')
+
+    def test_math_subtract(self):
+        '''subtracts parameters in "/math/" resource when operation is "-".'''
+        response = app.test_client().get('/math/5-5')
+        assert(response.data.decode() == '0')
+
+    def test_math_multiply(self):
+        '''multiplies parameters in "/math/" resource when operation is "*".'''
+        response = app.test_client().get('/math/5*5')
+        assert(response.data.decode() == '25')
+
+    def test_math_divide(self):
+        '''divides parameters in "/math/" resource when operation is "div".'''
+        response = app.test_client().get('/math/5div5')
+        assert(response.data.decode() == '1.0')
+    
+    def test_math_modulo(self):
+        '''finds remainder of parameters in "/math/" resource when operation is "%".'''
+        response = app.test_client().get('/math/5%5')
+        assert(response.data.decode() == '0')
