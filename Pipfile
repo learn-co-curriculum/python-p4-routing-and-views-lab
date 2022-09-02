@@ -5,8 +5,9 @@ name = "pypi"
 
 [packages]
 flask = "*"
-pytest = "*"
 ipdb = "*"
+pytest = "*"
+bs4 = "*"
 
 [dev-packages]
 
