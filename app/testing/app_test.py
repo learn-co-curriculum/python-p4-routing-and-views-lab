@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import io
 import sys
 
-from app.flask_app import app
+from app import app
 
 class TestApp:
     '''Flask application in flask_app.py'''
