@@ -58,7 +58,7 @@ Instructions begin here:
   It must perform the appropriate operation on the two numbers in the order that
   they are presented. The included operations should be: `+`, `-`, `*`, `div`
   (`/` would change the URL path), and `%`. Its URL should be of the format
-  `/math/parameters`.
+  `/math/<num1><operation><num2>`.
 
 Once all of your tests are passing, commit and push your work using `git` to
 submit.
