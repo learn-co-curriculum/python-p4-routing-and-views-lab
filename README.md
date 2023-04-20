@@ -50,7 +50,7 @@ Instructions begin here:
   Contain an `h1` element that contains the title of this application, "Python
   Operations with Flask Routing and Views".
 - A `print_string` view should take one parameter, a string. It should print
-  the string in the terminal _and_ display it in the web browser. Its URL should
+  the string in the console _and_ display it in the web browser. Its URL should
   be of the format `/print/parameter`.
 - A `count()` view should take one parameter, an integer. It should display
   all numbers in the `range` of that parameter on separate lines. Its URL
@@ -59,7 +59,7 @@ Instructions begin here:
   It must perform the appropriate operation on the two numbers in the order that
   they are presented. The included operations should be: `+`, `-`, `*`, `div`
   (`/` would change the URL path), and `%`. Its URL should be of the format
-  `/math/<num1><operation><num2>`.
+  `/math/<num1>/<operation>/<num2>`.
 
 Once all of your tests are passing, commit and push your work using `git` to
 submit.
