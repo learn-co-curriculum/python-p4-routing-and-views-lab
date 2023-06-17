@@ -38,7 +38,7 @@ your application as a script, remember to configure it with the following
 commands from the `server/` directory:
 
 ```console
-$ export FLASK_APP=app.py
+$ export FLASK_APP=server/app.py
 $ export FLASK_RUN_PORT=5555
 ```
 
