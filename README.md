@@ -29,13 +29,15 @@
 
 ## Instructions
 
-This is a **test-driven lab**. Run `pipenv install` to create your virtual
-environment and `pipenv shell` to enter the virtual environment. Then enter the
-`server/` directory and run `pytest -x` to run your tests. Use these
-instructions and `pytest`'s error messages to complete your work in the
-`server/` directory. If you prefer working in a Flask environment to running
-your application as a script, remember to configure it with the following
-commands from the `server/` directory:
+> **This is a *test-driven lab*.
+<br><br>
+Run `pipenv install` to create your virtual environment and `pipenv shell` to enter the virtual environment.
+<br><br>
+Then `cd` into the `server/` directory and run `pytest -x` to run your tests.
+<br><br>
+Use these instructions and `pytest`'s error messages to complete your work in the `server/` directory.
+<br><br>
+If you prefer working in a Flask environment instead of running your application as a script, remember to configure it by running the following commands from the `server/` directory:**
 
 ```console
 $ export FLASK_APP=app.py
